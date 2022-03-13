@@ -59,44 +59,53 @@ if(addBtn !== null) {
             "content": document.querySelector('.add-brewery-box textarea[name=content]').value,
             "status": "publish"
         }
-        const createPost = new XMLHttpRequest();
-        createPost.open('POST', `${wpApiSettings.restURL}/wp-json/wp/v2/brewery/`);
-        // createPost.setRequestHeader('same-origin');
-        createPost.setRequestHeader("X-WP-nonce", wpApiSettings.nonce);
-        createPost.setRequestHeader(
-            "Content-type", 
-            "application/json;charset=UTF-8", 
-            'Access-Control-Allow-Origin:*');
-        createPost.send(JSON.stringify(postData));
-        createPost.onreadystatechange = () => {
-            if(createPost.readyState === 4) {
-                if(createPost.status === 201) {
-                    document.querySelector('.add-brewery-box input[name=title]').value = "";
-                    document.querySelector('.add-brewery-box textarea[name=content]').value = "";
-                } else {
-                    alert("Error");
-                }
-            }
-        }
-        // fetch("http://find-a-brewer.test/wp-json/wp/v2/brewery/", {
-        //     method: 'POST',
-        //     credentials: 'same-origin',
-        //     headers: new Headers({'Content-type': 'application/json; charset=UTF-8', 
-        //             "Accept": "application/json",
-        //             "Access-Control-Allow-Origin" : "*", 
-        //             "Access-Control-Allow-Credentials" : true,
-        //             'X-WP-Nonce' : Ajax.nonce
-        //     }),
-        //     body: JSON.stringify(postData)
-        // })
-        // .then((response) => {
-        //     if(!response.ok) {
-        //         throw new Error(response.status)
+
+        // The XMLHttpRequest way ---> the old way
+
+        // const createPost = new XMLHttpRequest();
+        // createPost.open('POST', `${wpApiSettings.restURL}/wp-json/wp/v2/brewery/`);
+        // // createPost.setRequestHeader('same-origin');
+        // createPost.setRequestHeader("X-WP-nonce", wpApiSettings.nonce);
+        // createPost.setRequestHeader(
+        //     "Content-type", 
+        //     "application/json;charset=UTF-8", 
+        //     'Access-Control-Allow-Origin:*');
+        // createPost.send(JSON.stringify(postData));
+        // createPost.onreadystatechange = () => {
+        //     if(createPost.readyState === 4) {
+        //         if(createPost.status === 201) {
+        //             document.querySelector('.add-brewery-box input[name=title]').value = "";
+        //             document.querySelector('.add-brewery-box textarea[name=content]').value = "";
+        //         } else {
+        //             alert("Error");
+        //         }
         //     }
-        //     console.log(response.json())
-        // })
-        // .catch((error) => {
-        //     console.log(error)
-        // })
+        // }
+
+        // The fetch way ---> the modern way
+
+        fetch("http://find-a-brewer.test/wp-json/wp/v2/brewery/", {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: new Headers({'Content-type': 'application/json; charset=UTF-8', 
+                    // "Accept": "application/json",
+                    // "Access-Control-Allow-Origin" : "*", 
+                    // "Access-Control-Allow-Credentials" : true,
+                    'X-WP-Nonce' :  wpApiSettings.nonce
+            }),
+            body: JSON.stringify(postData)
+        })
+        .then((response) => {
+            if(!response.ok) {
+                throw new Error(response.status)
+            }
+            else {
+                document.querySelector('.add-brewery-box input[name=title]').value = "";
+                document.querySelector('.add-brewery-box textarea[name=content]').value = "";
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     })
 }
