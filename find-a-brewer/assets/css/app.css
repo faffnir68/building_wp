@@ -1,0 +1,123 @@
+/**
+* BASE
+*/
+
+:root {
+    --white:rgba(215, 215, 215, 1);
+}
+
+*,*::after,*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1 {
+    font-size: 3em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    letter-spacing: 3px;
+    color: skyblue;
+}
+
+/**
+* HEADER + FOOTER
+*/
+
+header {
+    background: #222;
+    margin: auto;
+    width: 100%;
+    padding: 0 1em;
+}
+footer {
+    background: #222;
+    margin: auto;
+    width: 100%;
+    padding: 0.5em;
+    bottom: 0;
+}
+.hd-container, .ft-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1600px;
+    width: 100%;
+    margin: auto;
+    height: 200px;
+}
+.ft-container {
+    height: 100px;
+}
+.search-form {
+    max-width: 750px;
+    width: 100%;
+}
+.search-form input {
+    background-color: #222;
+    border: none;
+    border-bottom: 1px solid #fff;
+    padding: 0.5em 0.75em;
+    color: #fff;
+    outline: none;
+    max-width: 750px;
+    width: 100%;
+    box-shadow: none;
+    font-size: 1.5em;
+    letter-spacing: 5px;
+}
+.search-form input::placeholder {
+    color: var(--white);
+}
+.ft-nav li {
+    list-style: none;
+}
+.ft-nav a {
+    font-size: 1.2em;
+    color: skyblue;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: 0.5em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    transition: all 0.4s ease;
+}
+.ft-nav a::before {
+    content: "";
+    width: 0%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: skyblue;
+    transition: all 0.4s ease;
+}
+.ft-nav a:hover::before {
+    content: "";
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: skyblue;
+}
+
+/**
+* FRONT PAGE map content
+*/
+.sec-map {
+    display: flex;
+}
+#map { 
+    min-height: 80vh;
+    max-height: 80vh;
+    overflow: hidden;
+    width: 75%;
+}
+.town-brewery-list {
+    background: #222;
+    min-height: 80vh;
+    max-height: 80vh;
+    overflow: hidden;
+    overflow-y: auto;
+    width: 25%;
+}

@@ -1,6 +1,6 @@
 <?php
 function brewery_app_scripts() {
-    // wp_enqueue_style('brewery_app_style', get_template_directory_uri() . '/assets/style/app.css');
+    wp_enqueue_style('brewery_app_style', get_template_directory_uri() . '/assets/css/app.css');
     wp_enqueue_script('brewery_app_script', get_template_directory_uri() . '/assets/js/app.js', array(), '1.0.0', true);
     wp_localize_script('brewery_app_script', 'wpApiSettings', array(
         'restURL' => get_site_url(),
