@@ -27,6 +27,13 @@
     });
     map.addControl(new mapboxgl.NavigationControl());
 </script>
+<script type="text/javascript">
+    var element = document.querySelector('#search-text');
+    var autoComplete = new AutoComplete(element);
+    element.onkeyup = function () {
+        autoComplete.getSuggestionList();
+    }
+</script>
 
 </body>
 </html>

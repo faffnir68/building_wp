@@ -1,7 +1,13 @@
 <?php
+function wpdocs_after_setup_theme() {
+    add_theme_support( 'html5', array( 'search-form' ) );
+}
+add_action( 'after_setup_theme', 'wpdocs_after_setup_theme' );
+
 function brewery_app_scripts() {
     wp_enqueue_style('brewery_app_style', get_template_directory_uri() . '/assets/css/app.css');
     wp_enqueue_script('brewery_app_script', get_template_directory_uri() . '/assets/js/app.js', array(), '1.0.0', true);
+    wp_enqueue_script('brewery_app_script', get_template_directory_uri() . '/assets/js/autocomplete.js', array(), '1.0.0', true);
     wp_localize_script('brewery_app_script', 'wpApiSettings', array(
         'restURL' => get_site_url(),
         'nonce' => wp_create_nonce('wp_rest')
@@ -109,4 +115,22 @@ function get_breweries_from_api() {
         ]);
         }
 
+}
+
+function get_meta_values( $key = '', $type = 'post', $status = 'publish' ) {
+
+    global $wpdb;
+
+    if( empty( $key ) )
+        return;
+
+    $r = $wpdb->get_col( $wpdb->prepare( "
+        SELECT pm.meta_value FROM {$wpdb->postmeta} pm
+        LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+        WHERE pm.meta_key = %s 
+        AND p.post_status = %s 
+        AND p.post_type = %s
+    ", $key, $status, $type ) );
+
+    return $r;
 }

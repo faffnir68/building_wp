@@ -109,3 +109,17 @@ if(addBtn !== null) {
         })
     })
 }
+
+// TOPPAGE - Ajax search by city on map
+// const city = document.getElementById("search-text");
+// const autocompleteBox = document.getElementById("autocomplete-results")
+// const minLetters = 2;
+
+// if(city !== null) {
+//     city.addEventListener('keyup', () => {
+//         let userInput = city.value
+//         if(userInput.length >= minLetters) {
+
+//         }
+//     })
+// }
